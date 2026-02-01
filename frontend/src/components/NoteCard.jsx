@@ -2,6 +2,7 @@ import React from 'react';
 import { Pencil, Trash2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { BASE_URL } from '../utils';
 
 const NoteCard = ({ note, onDelete }) => {
 
@@ -9,7 +10,7 @@ const NoteCard = ({ note, onDelete }) => {
         if (!window.confirm("Are you sure you want to delete this note?")) return;
 
         try {
-            const response = await fetch(`http://localhost:5001/api/notes/${note._id}`, {
+            const response = await fetch(`${BASE_URL}/api/notes/${note._id}`, {
                 method: 'DELETE',
             });
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { BASE_URL } from '../utils';
 
 const Createpage = () => {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Createpage = () => {
             const fetchNote = async () => {
                 setIsLoading(true);
                 try {
-                    const response = await fetch(`http://localhost:5001/api/notes/${id}`);
+                    const response = await fetch(`${BASE_URL}/api/notes/${id}`);
 
                     if (!response.ok) {
                         throw new Error('Failed to load note');
@@ -47,8 +48,8 @@ const Createpage = () => {
         try {
             const method = id ? 'PUT' : 'POST';
             const url = id
-                ? `http://localhost:5001/api/notes/${id}`
-                : `http://localhost:5001/api/notes`;
+                ? `${BASE_URL}/api/notes/${id}`
+                : `${BASE_URL}/api/notes`;
 
             const response = await fetch(url, {
                 method,

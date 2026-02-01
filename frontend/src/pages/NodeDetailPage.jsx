@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Pencil, Trash2, Calendar, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { BASE_URL } from '../utils';
 
 const NodeDetailPage = () => {
     const { id } = useParams();
@@ -12,7 +13,7 @@ const NodeDetailPage = () => {
     useEffect(() => {
         const fetchNote = async () => {
             try {
-                const response = await fetch(`http://localhost:5001/api/notes/${id}`);
+                const response = await fetch(`${BASE_URL}/api/notes/${id}`);
                 if (!response.ok) {
                     throw new Error("Failed to load note");
                 }
@@ -32,7 +33,7 @@ const NodeDetailPage = () => {
         if (!window.confirm("Are you sure you want to delete this note?")) return;
 
         try {
-            const response = await fetch(`http://localhost:5001/api/notes/${id}`, {
+            const response = await fetch(`${BASE_URL}/api/notes/${id}`, {
                 method: 'DELETE',
             });
             if (response.ok) {

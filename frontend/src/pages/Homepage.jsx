@@ -4,6 +4,8 @@ import RateLimitWarning from '../components/RateLimitWarning';
 import { FileText, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
+import { BASE_URL } from '../utils';
+
 const Homepage = () => {
     const [notes, setNotes] = useState([]);
     const [isRateLimited, setIsRateLimited] = useState(false);
@@ -13,8 +15,7 @@ const Homepage = () => {
     useEffect(() => {
         const fetchNotes = async () => {
             try {
-                // Assuming backend is running on default port 5001
-                const response = await fetch('http://localhost:5001/api/notes');
+                const response = await fetch(`${BASE_URL}/api/notes`);
 
                 if (response.status === 429) {
                     setIsRateLimited(true);
@@ -50,7 +51,7 @@ const Homepage = () => {
         setIsRateLimited(false);
         setError(null);
         try {
-            const response = await fetch('http://localhost:5001/api/notes');
+            const response = await fetch(`${BASE_URL}/api/notes`);
             if (response.status === 429) {
                 setIsRateLimited(true);
                 toast.error("Still rate limited. Please wait.");
